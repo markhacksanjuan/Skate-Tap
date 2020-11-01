@@ -75,19 +75,17 @@ window.onload = () => {
       )
     }
     passed = (obstacle) => {
-      return(this.right() === (obstacle.left() + obstacle.width))
+      return(this.right() === (obstacle.left()))
     }
         
     }
-    
-
     
     // --------------------- CREACIÓN DE OBJETOS ----------------------
     // CREACIÓN DEL FONDO
     const hGround = 50
     const colorGround = 'brown'
     
-    const background = new BackgroundColor(0, canvas.height - hGround, canvas.width, hGround, colorGround)
+    const background = new BackgroundColor(canvas.width, hGround, 0, canvas.height - hGround, colorGround)
     const clear = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
     }
@@ -145,7 +143,7 @@ window.onload = () => {
       }
       // ---------- fin manipulacion de velocidad de obstaculos
 
-      let minHeight = 30
+      let minHeight = 35
       let maxHeight = 55
       const obsH = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight)
       const obsW = Math.floor(obsH * kObs)
@@ -195,7 +193,7 @@ window.onload = () => {
     const startGame = () => {
       background.draw()
       skate.draw()
-      // updateGameArea()
+      updateGameArea()
       createObstacles()
     }
     
@@ -216,6 +214,7 @@ window.onload = () => {
       updateObstacles()
       checkPoints()
       if(checkGameOver()){return}
+      writeText('black', '20px sans-serif', canvas.width*3/4, canvas.height/8, `${skate.points}`)
           
       requestAnimationFrame(updateGameArea)
     }
