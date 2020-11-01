@@ -97,7 +97,7 @@ window.onload = () => {
     const skateX = canvas.width / 5
     const skateY = canvas.height - hGround - skateH
     // CREACIÓN DE LA IMAGEN SKATE
-    const skate = new ImageCreation(skateW, skateH, skateX, skateY, '../images/skateboard.png')
+    const skate = new ImageCreation(skateW, skateH, skateX, skateY, './images/skateboard.png')
     
     // RELACIÓN DE IMAGEN SKATE UP DADA LA ANCHURA
     const kSkateUp = 512 / 380
@@ -106,7 +106,7 @@ window.onload = () => {
     const skateUpX = canvas.width / 5
     const skateUpY = canvas.height - hGround - skateUpH
     // CREACIÓN DE LA IMAGEN SKATE
-    const skateUp = new ImageCreation(skateUpW, skateUpH, skateUpX, skateUpY, '../images/skateboard_up.png')
+    const skateUp = new ImageCreation(skateUpW, skateUpH, skateUpX, skateUpY, './images/skateboard_up.png')
     
     // RELACIÓN DE IMAGEN SKATE DOWN DADA LA ANCHURA
     const kSkateDown = 512 / 380
@@ -115,7 +115,7 @@ window.onload = () => {
     const skateDownX = canvas.width / 5
     const skateDownY = canvas.height - hGround - skateDownH
     // CREACIÓN DE LA IMAGEN SKATE
-    const skateDown = new ImageCreation(skateDownW, skateDownH, skateDownX, skateDownY, '../images/skateboard_down.png')
+    const skateDown = new ImageCreation(skateDownW, skateDownH, skateDownX, skateDownY, './images/skateboard_down.png')
     
     
     
@@ -152,7 +152,7 @@ window.onload = () => {
       if(counter % minTime === 0){
         let obsY = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight)
         // ---- CREACION DEL OBSTACULO
-        let obstaculo = new ImageCreation(obsW, obsH, canvas.width, canvas.height - hGround - obsH, '../images/rock_hand01.png')
+        let obstaculo = new ImageCreation(obsW, obsH, canvas.width, canvas.height - hGround - obsH, './images/rock_hand01.png')
         obstaclesArr.push(obstaculo)
       }
     }
