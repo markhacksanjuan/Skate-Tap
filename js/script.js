@@ -159,7 +159,6 @@ window.onload = () => {
     // ---------- MOVIMIENTO DE LOS OBSTACULOS -------
     const updateObstacles = () => {
       for(i = 0; i < obstaclesArr.length; i++){
-        console.log(obstaclesArr[i])
         obstaclesArr[i].x -= 2
         obstaclesArr[i].draw()
       }
