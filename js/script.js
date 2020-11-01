@@ -159,6 +159,7 @@ window.onload = () => {
     // ---------- MOVIMIENTO DE LOS OBSTACULOS -------
     const updateObstacles = () => {
       for(i = 0; i < obstaclesArr.length; i++){
+        console.log(obstaclesArr[i])
         obstaclesArr[i].x -= 2
         obstaclesArr[i].draw()
       }
@@ -247,9 +248,6 @@ window.onload = () => {
       skateDown.points++
       skateUp.points++
       skate.points++
-      console.log(skate.points)
-      console.log(skateDown.points)
-      console.log(skateUp.points)
     }
   }
   const writeText = (_color, _font, _x, _y, _text) => {
