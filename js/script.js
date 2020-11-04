@@ -1,4 +1,5 @@
 window.onload = () => {
+  loadImages()
 
   // ----------------- BOUNDARIES -----------------------
 
@@ -44,7 +45,7 @@ window.onload = () => {
     
     // ------------------------- INICIACIÓN DEL JUEGO
   const startGame = () => {
-    background.draw()
+    backgroundSurf.draw()
     skate.draw()
     updateGameArea()
     createObstacles()
@@ -54,7 +55,7 @@ window.onload = () => {
     // -------------- GENERACIÓN DEL LOOP DEL JUEGO
   const updateGameArea = () => {
     clear()
-    background.draw()
+    backgroundSurf.draw()
     newPos()
     if(skate.speedY < 0){
       jump()

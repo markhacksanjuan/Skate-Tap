@@ -24,24 +24,19 @@ class BackgroundColor {
     // ----------------------- IMAGE CLASS -----------------
 
 class ImageCreation {
-  constructor(_width, _height, _x, _y, _src){
+  constructor(_width, _height, _x, _y, _img){
     this.width = _width
     this.height = _height
     this.x = _x
     this.y = _y
     this.speedX = 0
     this.speedY = 0
+    this.img = _img
     this.gravity = 0
     this.gravitySpeed = 0
     this.drag = 0.99
     this.margin = 15
     this.points = 0
-      
-      const img = new Image()
-      img.addEventListener('load', () => {
-          this.img = img
-      })
-      img.src = _src
   }
   draw = () => {
   ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
