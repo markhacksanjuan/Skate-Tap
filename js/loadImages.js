@@ -3,6 +3,9 @@ let backgroundSurf
 const skateArr = []
 let skate, skateUp, skateDown
 const obstacleImgArr = []
+const nuvolsImgArr = []
+
+let onada, onada2
 
 
 const loadImages = () => {
@@ -16,10 +19,10 @@ const loadImages = () => {
     
         // RELACION DE IMAGEN SKATE DADA LA ANCHURA
         const kSkate = 1028 / 908
-        const skateW = 100
-        const skateH = skateW / kSkate
-        const skateX = canvas.width / 5
-        const skateY = canvas.height - hGround - skateH
+        const skateW = 75
+        const skateH = Math.floor(skateW / kSkate)
+        const skateX = Math.floor(canvas.width / 5)
+        const skateY = canvas.height/2
         // CREACIÓN DE LA IMAGEN SKATE
         const skateImg = new Image()
         skateImg.src = '../images/surfer.png'
@@ -28,9 +31,9 @@ const loadImages = () => {
         // RELACIÓN DE IMAGEN SKATE UP DADA LA ANCHURA
         const kSkateUp = 512 / 380
         const skateUpW = skateW
-        const skateUpH = skateUpW / kSkateUp
-        const skateUpX = canvas.width / 5
-        const skateUpY = canvas.height - hGround - skateUpH
+        const skateUpH = skateH
+        const skateUpX = skateX
+        const skateUpY = skateY
         // CREACIÓN DE LA IMAGEN SKATE
         const skateUpImg = new Image()
         skateUpImg.src = '../images/surfer-up.png'
@@ -39,9 +42,9 @@ const loadImages = () => {
         // RELACIÓN DE IMAGEN SKATE DOWN DADA LA ANCHURA
         const kSkateDown = 512 / 380
         const skateDownW = skateW
-        const skateDownH = skateDownW / kSkateDown
-        const skateDownX = canvas.width / 5
-        const skateDownY = canvas.height - hGround - skateDownH
+        const skateDownH = skateH
+        const skateDownX = skateX
+        const skateDownY = skateY
         // CREACIÓN DE LA IMAGEN SKATE
         const skateDownImg = new Image()
         skateDownImg.src = '../images/surfer-down.png'
@@ -60,6 +63,16 @@ const loadImages = () => {
         tauroImg.src = '../images/tauro.png'
         obstacleImgArr.push(carroImg, colaImg, rocaImg, rodaImg, tauroImg)
 
+        const nuvol1Img = new Image()
+        nuvol1Img.src = '../images/nuvol-1.png'
+        const nuvol2Img = new Image()
+        nuvol2Img.src = '../images/nuvol-2.png'
 
+        nuvolsImgArr.push(nuvol1Img, nuvol2Img)
+
+        const onadaImg = new Image()
+        onadaImg.src = '../images/onada.png'
+        onada = new ImageCreation(onadaWidth, onadaHeight, 0, onadaY, onadaImg)
+        onada2 = new ImageCreation(onadaWidth, onadaHeight, onadaWidth, onadaY, onadaImg)
 
 }

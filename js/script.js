@@ -4,13 +4,18 @@ window.onload = () => {
   // ----------------- BOUNDARIES -----------------------
 
   const checkBoundaries = () => {
-    if(skateUp.top() < 0){
+    if(skateUp.top() < onadaY - 60){
       for(i = 0; i < skateArr.length; i++){
-        skateArr[i].y = 0
+        skateArr[i].y = onadaY - 20
         skateArr[i].speedY = 0
-        skateArr[i].gravity = .3
+        skateArr[i].gravity = .01
       }
-      topBoundary()
+    }
+    if(skateDown.bottom() > canvas.height){
+      skateArr.forEach(skate => {
+        skate.speedY = 0
+        skate.gravity = 0
+      })
     }
   }
 
@@ -18,26 +23,19 @@ window.onload = () => {
         // --------------------- MOVIMIENTOS ---------------------
   const jump = () => {
     skateUp.draw()
-    skateUp.hitBottom(canvas.height - hGround)
-    skate.hitBottom(canvas.height - hGround)
-    skateDown.hitBottom(canvas.height - hGround)
+
   }
   const down = () => {
     skateDown.draw()
-    skateDown.hitBottom(canvas.height - hGround)
-    skate.hitBottom(canvas.height - hGround)
-    skateUp.hitBottom(canvas.height - hGround)
+
   }
   const newPos = () => {
-    skate.newPos()
-    skateUp.newPos()
-    skateDown.newPos()
+    skateArr.forEach(skate => {
+      skate.newPos()
+    })
   }
 
-  // ------------------ ANIMACIONES --------------------
-  const topBoundary = () => {
-    backgroundAnimation.draw()
-  }
+
     
     
     //---------------------------------- JUEGO -----------------------------------
@@ -45,33 +43,47 @@ window.onload = () => {
     
     // ------------------------- INICIACIÓN DEL JUEGO
   const startGame = () => {
+    dateObstacle = Date.now()
     backgroundSurf.draw()
     skate.draw()
-    updateGameArea()
+    onada.draw()
     createObstacles()
+    createNuvols()
+    updateGameArea()
+    
   }
-    
-    
-    // -------------- GENERACIÓN DEL LOOP DEL JUEGO
+  
+  
+  // -------------- GENERACIÓN DEL LOOP DEL JUEGO
   const updateGameArea = () => {
-    clear()
-    backgroundSurf.draw()
-    newPos()
-    if(skate.speedY < 0){
-      jump()
-    }else if(skate.speedY === 0) {
-      skate.draw()
-      skate.hitBottom(canvas.height - hGround)
-    }else if(skate.speedY > 0){
-      down()
+    if(!endGame){
+      backgroundSurf.draw()
+      moveOnada()
+      onada.draw()
+      onada2.draw()
+      moveNuvols()
+      newPos()
+      if(skate.speedY < 0){
+        jump()
+      }else if(skate.speedY === 0) {
+        skate.draw()
+        skate.hitBottom(canvas.height - hGround)
+      }else if(skate.speedY > 0){
+        down()
+      }
+      createObstacles()
+      updateObstacles()
+      checkBoundaries()
+      // checkPoints()
+      skate.points++
+      checkGameOver()
+      writeText('black', '24px sans-serif', canvas.width*7/8, canvas.height/15, `score: ${skate.points}`)
+          
+      requestAnimationFrame(updateGameArea)
+    }else {
+      gameOver()
+      clickable = true
     }
-    updateObstacles()
-    checkBoundaries()
-    checkPoints()
-    if(checkGameOver()){return}
-    writeText('black', '20px sans-serif', canvas.width*3/4, canvas.height/8, `${skate.points}`)
-        
-    requestAnimationFrame(updateGameArea)
   }
         
         // ------------ FIN DEL JUEGO
@@ -80,8 +92,7 @@ window.onload = () => {
       return skate.collisionWith(obstacle)
     })
     if(collision){
-      gameOver()
-      return true
+      endGame = true
     }
   }
         
@@ -90,18 +101,33 @@ window.onload = () => {
     backgroundGameOver.draw()
     const gameOverText = 'Sorry dude... it\'s over! '
     writeText('red', '50px sans-serif', canvas.width/2, canvas.height/3, gameOverText)
+    writeText('red', '30px sans-serif', canvas.width/2, canvas.height*5/6, `${skate.points}`)
+
+    if(skate.points < 1000){
+      writeText('red', '30px sans-serif', canvas.width/2, canvas.height*2/3, `Nice try...`)
+    }else if(skate.points >= 1000 && skate.points < 3000){
+      writeText('red', '30px sans-serif', canvas.width/2, canvas.height*2/3, `Not bad...`)
+    }else if(skate.points >= 3000 && skate.points < 5000){
+      writeText('red', '30px sans-serif', canvas.width/2, canvas.height*2/3, `Cool man!...`)
+    }else if(skate.points >= 6000 && skate.points < 10000){
+      writeText('red', '30px sans-serif', canvas.width/2, canvas.height*2/3, `Wow!!!...`)
+    }else if(skate.points >= 10000){
+      writeText('red', '30px sans-serif', canvas.width/2, canvas.height*2/3, `Master surfer!!!...`)
+    }
+
     
   }
         
         // ---------------- PUNTUACIÓN ------------------
   const checkPoints = () => {
     const points = obstaclesArr.some((obstacle) => {
-      return skate.passed(obstacle) || skateDown.passed(obstacle) || skateUp.passed(obstacle)
+        return skate.passed(obstacle)
+      
     })
     if(points){
-      skateDown.points++
-      skateUp.points++
-      skate.points++
+      skateArr.forEach(skate => {
+        skate.points++
+      })
     }
   }
   const writeText = (_color, _font, _x, _y, _text) => {
@@ -118,11 +144,18 @@ window.onload = () => {
   //     startGame()
   //   };
   document.getElementById("start-game").addEventListener('click', () => {
-    startGame()
+    if(clickable){
+      clickable = false
+      endGame = false
+      obstaclesArr.length = 0
+      nuvolsArr.length = 0
+      skate.points = 0
+      startGame()
+    }
   })
   document.getElementById("my-canvas").addEventListener('click', () => {
     for(i = 0; i < skateArr.length; i++){
-      skateArr[i].speedY = -6
+      skateArr[i].speedY = -5
       skateArr[i].gravity = 0.15
     }
   })

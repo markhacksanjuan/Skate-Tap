@@ -37,6 +37,7 @@ class ImageCreation {
     this.drag = 0.99
     this.margin = 15
     this.points = 0
+    this.acc = -1
   }
   draw = () => {
   ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
@@ -46,8 +47,12 @@ class ImageCreation {
   this.y += this.speedY
   // this.speedY *= this.drag
   }
+  newPosX = () => {
+    this.speedX -= this.acc
+    this.x -= this.speedX
+  }
   hitBottom = (_groundHeight) => {
-      if(this.y + this.height > (_groundHeight - 2)){
+      if((this.y + this.height) > _groundHeight){
           this.speedY = 0
           this.gravity = 0
           return true
@@ -74,7 +79,7 @@ class ImageCreation {
     )
   }
   passed = (obstacle) => {
-    return(this.right() === obstacle.left() && this.bottom() < obstacle.top())
+    return(this.left() > obstacle.right())
   }          
 }
 
