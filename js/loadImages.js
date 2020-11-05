@@ -76,3 +76,4 @@ const loadImages = () => {
         onada2 = new ImageCreation(onadaWidth, onadaHeight, onadaWidth, onadaY, onadaImg)
 
 }
+loadImages()

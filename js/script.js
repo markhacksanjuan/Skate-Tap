@@ -1,5 +1,3 @@
-loadImages()
-
 const startGame = () => {
   dateObstacle = Date.now()
   backgroundSurf.draw()
