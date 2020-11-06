@@ -20,6 +20,24 @@ const updateObstacles = () => {
             obstacle.newPosX()
             obstacle.draw()
         })
-    
+}
+
+const muteButton = () => {
+    const startGame = document.getElementById('start-game')
+    startGame.classList.toggle('text-muted')
+    if(endGame){
+        startGame.innerText = 'RESTART'
+    }else {
+        startGame.innerText = 'LET\'S SURF'
+    }
+}
+
+const writeScore = () => {
+    const ul = document.getElementById('score')
+    const newLi = document.createElement('li')
+    newLi.setAttribute('class', 'list-group-item bg-transparent')
+    newLi.innerText = `${skate.points}`
+    ul.appendChild(newLi)
+
 
 }

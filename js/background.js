@@ -4,4 +4,5 @@
 
 
 //  ----------- CREACIÓN DE FONDO PARA ANIMACIÓN ------------
-const backgroundAnimation = new BackgroundColor(canvas.width, canvas.height, 0, 0, 'rgb(255, 0, 0, 0.8)')
+// const backgroundAnimation = new BackgroundColor(canvas.width, canvas.height, 0, 0, 'rgb(255, 0, 0, 0.8)')
+const backgroundAnimation = new BackgroundColor(canvas.width, canvas.height, 0, 0, '#9AE3FE')

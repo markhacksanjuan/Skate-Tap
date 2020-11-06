@@ -5,27 +5,30 @@ const startGame = () => {
   onada.draw()
   createObstacles()
   createNuvols()
+  muteButton()
   updateGameArea()
   
 }
 const gameOver = () => {
-  const backgroundGameOver = new BackgroundColor(canvas.width, canvas.height, 0, 0, 'black')
+  const backgroundGameOver = new BackgroundColor(canvas.width, canvas.height, 0, 0, '#9AE3FE')
   backgroundGameOver.draw()
   const gameOverText = 'Sorry dude... it\'s over! '
-  writeText('red', '50px sans-serif', canvas.width/2, canvas.height/3, gameOverText)
-  writeText('red', '30px sans-serif', canvas.width/2, canvas.height*5/6, `${skate.points}`)
+  writeText('#f7aa00', '50px sans-serif', canvas.width/2, canvas.height/3, gameOverText)
+  // writeText('#f7aa00', '30px sans-serif', canvas.width/2, canvas.height*5/6, `${skate.points}`)
 
   if(skate.points < 1000){
-    writeText('red', '30px sans-serif', canvas.width/2, canvas.height*2/3, `Nice try...`)
+    writeText('#f7aa00', '30px sans-serif', canvas.width/2, canvas.height*2/3, `Nice try...`)
   }else if(skate.points >= 1000 && skate.points < 3000){
-    writeText('red', '30px sans-serif', canvas.width/2, canvas.height*2/3, `Not bad...`)
+    writeText('#f7aa00', '30px sans-serif', canvas.width/2, canvas.height*2/3, `Not bad...`)
   }else if(skate.points >= 3000 && skate.points < 5000){
-    writeText('red', '30px sans-serif', canvas.width/2, canvas.height*2/3, `Cool man!...`)
+    writeText('#f7aa00', '30px sans-serif', canvas.width/2, canvas.height*2/3, `Cool man!...`)
   }else if(skate.points >= 6000 && skate.points < 10000){
-    writeText('red', '30px sans-serif', canvas.width/2, canvas.height*2/3, `Wow!!!...`)
+    writeText('#f7aa00', '30px sans-serif', canvas.width/2, canvas.height*2/3, `Wow!!!...`)
   }else if(skate.points >= 10000){
-    writeText('red', '30px sans-serif', canvas.width/2, canvas.height*2/3, `Master surfer!!!...`)
+    writeText('#f7aa00', '30px sans-serif', canvas.width/2, canvas.height*2/3, `Master surfer!!!...`)
   }
+  muteButton()
+  writeScore()
 }
 
 
